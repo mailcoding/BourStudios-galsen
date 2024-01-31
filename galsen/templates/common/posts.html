@@ -1,0 +1,164 @@
+{% load static %}
+<section>
+    <form action="#" class="search">
+        <input type="search" name="q" id="search-input" placeholder="Rechercher Filtrer"
+        />
+        <button type="submit" class="button">
+            <i class="fa fa-search"> Search </i>
+        </button>
+    </form>
+    
+</section>
+<section class="slider pubPolitique">
+    <div class="sliderP">
+        <a href="#">
+            <img src="{% static 'assets/delete/banner/banner.png' %}">
+        </a>
+    </div>
+
+    <div class="sliderP">
+        <a href="#">
+            <img src="{% static 'assets/delete/banner/banner.png' %}">
+        </a>
+    </div>
+
+    <div class="sliderP">
+        <a href="#">
+            <img src="{% static 'assets/delete/banner/banner.png' %}">
+        </a>
+    </div>
+
+    <div class="sliderP">
+        <a href="#">
+            <img src="{% static 'assets/delete/banner/banner.png' %}">
+        </a>
+    </div>
+
+    <div class="prev-button" onclick="plusSlideP(-1)">&#10094;</div>
+    <div class="next-button" onclick="plusSlideP(1)">&#10095;</div>
+
+    <div class="lines PageLines">
+        <div class="line_P" onclick="currentSlideP(1)"></div>
+
+        <div class="line_P" onclick="currentSlideP(2)"></div>
+
+        <div class="line_P" onclick="currentSlide(3)"></div>
+
+        <div class="line_P" onclick="currentSlide(4)"></div>
+    </div>
+</section>
+
+<section class="posts">
+
+    {% for post in posts %}
+
+        <section class="actuality">
+            <section class="profile">
+                <a href="#" class="user_infos">
+                    <div class="user_Photo">
+                        {% if post.user.profile_image and post.user.profile_image.url %}
+                            <img src="{{ post.user.profile_image.url}}">
+                        {% else %}
+                            <img src="{% static 'assets/default/user.png' %}">
+                        {% endif %}
+                    </div>
+                    <div class="user_details">
+                        <div class="name">
+                            <h3 class="name-user">
+                                {{ post.user.first_name }} {{ post.user.last_name }} 
+                            </h3>
+                        </div>
+                        <div class="user_localhome">
+                            <span class="fa fa-map-marker"> 
+                                <b>{{ post.user.quartier }}  - {{ post.user.ville }}  - {{ post.user.pays }} </b> 
+                            </span>
+                        </div>
+                        <div class="time_post">
+                            <span class="fa fa-clock-o">&nbsp;<i class="primary">Posté le {{ post.date_creation_post }},</i></span>
+                            &nbsp;
+                            <span class="fa fa-desktop">&nbsp;
+                                <i class="primary">depuis un systéme</i> 
+                                <b class="danger">{{ post.session_info }}</b> 
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                <div class="action">
+                    <div><i class="fa fa-ellipsis-h"></i></div>
+                    <ul>
+                        <li class="current"><a href="#">Abonner</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content_post">
+                <div class="content-post">
+                    <div class="title">
+                        {{ post.contenu_post|safe|truncatewords_html:10 }}
+                    </div>
+                    <div class="description-post">
+                        <p>
+                            {{ post.contenu_post|safe }}
+                        </p>
+                    </div>
+                </div>
+                <div class="post-details" id="imageCarousel">
+                    
+                    {% for media in post.mediaspost_set.all %}
+                        {% if media.image %}
+                            <a href="{{ media.image.url }}" data-lightbox="mygallery" class="img">
+                                <img src="{{ media.image.url }}" class="affiche" alt="Post Image">
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if post.video %}
+                        <video autoplay muted controls loop disablepictureinpicture controlslist="nodownload noplaybackrate" class="img affiche">
+                            <source src="{{ post.video.url }}" type="video/mp4">
+                        </video>
+                    {% endif %}
+                </div>
+
+                
+            </section>
+
+            <div class="infos_followings">
+                <section class="like">
+                    <a href="#">
+                        <i class="fa fa-thumbs-up danger"></i>
+                        <i class="text"> Aimé par</i> 
+                        <b class="primary">8 000</b>
+                        <i class="text">membres. &nbsp;</i>
+                    </a>
+                </section>
+    
+                <section class="shares">
+                    <a href="#">
+                        <i class="fa fa-share-alt danger"></i>
+                        <i class="text">Et partagé par</i> 
+                        <b class="primary">8 000</b>
+                        <i class="text">membres.</i>
+                    </a>
+                </section>
+            </div>
+            
+            <section class="followers">
+                <label href="#" class="like-btn" onclick="toggleLike()">
+                    <span class="like-icon" id="likeIcon">
+                        <i class="fa fa-thumbs-up" ></i>
+                    </span>
+                </label>
+    
+                <label href="#">
+                    <i class="fa fa-comments"></i>
+                </label>
+    
+                <label href="#" id="pop-share">
+                    <i class="fa fa-share-alt"></i>
+                </label>
+            </section>
+        </section>
+
+    {% endfor %}
+
+</section>
