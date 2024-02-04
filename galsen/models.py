@@ -85,6 +85,10 @@ class Post(models.Model):
     dislike = models.ManyToManyField(CustomUser, blank=True, related_name='dislikes')
     shared_boby = models.TextField(blank=True, null=True)
     share_on = models.DateTimeField(blank=True, null=True)
+    shared_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True, related_name='+')
+
+    class Meta:
+        ordering = ['-created_on', '-shared_on']
 
     @property
     def nombre_commentaire(self):

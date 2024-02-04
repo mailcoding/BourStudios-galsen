@@ -32,3 +32,11 @@ class CustomUserCreationForm(UserCreationForm):
             raise forms.ValidationError("Les mots de passe ne correspondent pas.")
 
         return cleaned_data
+
+class ShareForm(forms.Form):
+    body = forms.CharField(
+        label='',
+        widget=forms.Textarea(attrs={
+            'rows': '3',
+            'placeholder': 'Say Something...'
+            }))
