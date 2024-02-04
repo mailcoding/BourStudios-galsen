@@ -1,0 +1,642 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+:root
+{
+      /*========== Colors ==========*/
+  --hue-color: 240;
+
+  --first-color: hsl(var(--hue-color), 53%, 49%);
+  --title-color: hsl(var(--hue-color), 53%, 15%);
+  --text-color: hsl(var(--hue-color), 1%, 4%);
+  --text-color-light: hsl(var(--hue-color), 12%, 65%);
+  --container-color: #fff;
+  --body-color: hsl(var(--hue-color), 24%, 94%);
+  --color-danger: hsl(0, 95%, 65%);
+
+  --color-primary-light: 0 0.8rem 0.8rem rgba(71, 7, 234, 0.2);
+  --color-danger-light: 0 0.8rem 0.8rem rgba(255, 67, 54, 0.2);
+  --color-success-light: 0 0.8rem 0.8rem rgba(34, 202, 75, 0.2);
+  --color-purple-light: 0 0.8rem 0.8rem rgba(160, 99, 245, 0.2);
+
+    /* Tailles */
+    --border-radius: 2rem;
+    --card-border-radius: 1rem;
+    --btn-padding: 0.6rem 2rem;
+    --search-padding: 0.6rem 1rem;
+    --card-padding: 1rem;
+
+    --sticky-top-left: 5.4rem;
+    --sticky-top-right: -18rem
+    
+}
+
+/*========== Variables Dark theme ==========*/
+body.dark-theme 
+{
+    --title-color: hsl(var(--hue-color), 12%, 95%);
+    --text-color: hsl(var(--hue-color), 12%, 75%);
+    --body-color: hsl(var(--hue-color), 10%, 16%);
+    --container-color: hsl(var(--hue),24%, 12%);
+}
+
+*, *::before, *::after
+{
+
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+    border: none;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    appearance: none;
+    box-sizing: border-box;
+}
+
+.text
+{
+    color: var(--title-color);
+}
+
+.primary
+{
+    color: #299bd5;
+}
+
+.normal
+{
+    color: var(--title-color);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  padding: 16px 16px 0;
+  margin: 56px 0 0 0;
+  font-size: 16px;
+  color: var(--title-color);
+  background: var(--body-color);
+}
+
+/* ============ Posts ================= */
+.posts
+{
+    width: 74%;
+    margin-bottom: 60px;
+}
+
+/* =========== Actuality =========== */
+.actuality
+{
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    background: var(--body-color);
+    border-radius: 10px;
+    box-shadow: 0.8rem 0.8rem 0.8rem 0.8rem rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease;
+    margin-bottom: 30px;
+}
+
+.actuality .profile
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.actuality .action
+{
+    position: relative;
+    margin-right: 30px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.action a
+{
+    color: var(--title-color);
+}
+
+.actuality .action ul li:hover
+{
+    cursor: pointer;
+    background-color: var(--color-danger);
+    border-radius: 5px;
+}
+
+.actuality .action ul
+{
+    position: absolute;
+    left: -395%;
+    padding: 5px;
+    line-height: 2em;
+    background: var(--body-color);
+    border: 1px solid var(--text-color-light);
+    box-shadow: 0.8rem 0.8rem 0.8rem 0.8rem rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: none;
+}
+
+.actuality .action ul li
+{
+    font-size: 25px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.actuality .action:hover ul
+{
+    display: block;
+}
+
+.actuality .profile a
+{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.actuality .profile a .user_Photo img
+{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.actuality .profile a .user_details
+{
+    color: var(--title-color);
+    margin-left: 10px;
+}
+
+.actuality .profile a .user_details .user_localhome span
+{
+    color: #299bd5;
+}
+
+.actuality .profile a .user_details .user_localhome span b
+{
+    color: var(--title-color);
+    font-size: 10px;
+}
+
+.actuality .profile a .user_details .time_post
+{
+    font-size: 10px;
+}
+
+.content_post .content-post
+{
+    position: relative;
+    padding: 10px;
+    color: var(--title-color);
+}
+
+.content_post .content-post .title
+{
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.content_post .content-post .title::before
+{
+    content: 'Voir plus';
+    color: #299bd5;
+    float: right;
+    position: relative;
+    top: 60%;
+    right: 20px;
+    transform: translateY(-50%);
+    font-size: 15px;
+}
+
+.content_post .content-post.actipe .title::before
+{
+    content: 'moins';
+}
+
+.content_post .content-post .description-post
+{
+    position: relative;
+    padding-left: 15px;
+    padding-right: 5px;
+    color: var(--title-color);
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.5s;
+    overflow-y: auto;
+}
+
+.content_post .content-post .description-post p
+{
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.content_post .content-post .description-post::-webkit-scrollbar
+{
+    width: 2px;
+}
+
+.content_post .content-post .description-post::-webkit-scrollbar-track
+{
+    background: var(--body-color);
+    border-radius: 25px;
+}
+
+.content_post .content-post .description-post::-webkit-scrollbar-thumb
+{
+    background: var(--title-color);
+    border-radius: 25px;
+}
+
+.content_post .content-post .description-post::-webkit-scrollbar-thumb:hover
+{
+    background: #b3b3b3;
+}
+
+.content_post .content-post.actipe .description-post
+{
+    max-height: 150px;
+}
+
+.content_post .post-details .contenu
+{
+    position: absolute;
+    z-index: -1;
+}
+
+.content_post .post-details a .affiche, .content_post .post-details .affiche
+{
+    border-radius: 10px;
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.post-details .img
+{
+    width: 100%;
+    display: inline-block;
+    margin-right: 8px; /* Espacement entre les images */
+}
+
+.post-details
+{
+    overflow-x: auto;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.post-details::-webkit-scrollbar
+{
+    width: 7px;
+}
+
+.followers
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.followers a
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 30px;
+    border-radius: 10px;
+    color: var(--title-color);
+    background: var(--body-color);
+    box-shadow: 0 0 0.1rem var(--title-color);
+}
+
+.infos_followings
+{
+    display: flex;
+}
+
+/* =============== Profession ============== */
+.professionnals
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+    margin-top: -63px;
+}
+
+.jobs
+{
+    margin-top: -2px;
+}
+
+section.professionnals.boutique
+{
+    margin-top: -5px;
+}
+
+.users
+{
+    width: 270px;
+    min-height: auto;
+    max-height: 450px;
+    border-radius: 10px;
+    align-items: center;
+    background: var(--body-color);
+    box-shadow: 0.8rem 0.8rem 0.8rem 0.8rem rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease;
+    overflow: hidden;
+}
+
+.users .couverture
+{
+    width: 270px;
+    height: 150px;
+}
+
+.users .couverture img
+{
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.users .user_profile
+{
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+    padding: 15px;
+}
+
+.users .user_profile img
+{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 2px solid #299bd5;
+    box-shadow: 5px 5px 2px rgba(0, 0, 0, 0.25),
+                inset 2px 2px 5px rgba(255, 255, 255, 0.778),
+                inset -3px -3px 5px rgba(0, 0, 0, 0.5);
+    object-fit: cover;
+}
+
+.job_date
+{
+    display: flex;
+}
+
+.job_date p
+{
+    margin-left: 10px;
+}
+
+.users .name 
+{
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--title-color);
+}
+
+.users .job 
+{
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #299bd5;
+}
+
+.users .job span
+{
+    color: var(--title-color);
+    font-size: 20px;
+    letter-spacing: 10px;
+    margin-left: 5px;
+}
+
+.users .job p i
+{
+    font-size: 15px;
+}
+
+.users .country
+{
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-danger);
+}
+
+/* ===== Gallery ====== */
+section.professionnals.gallery.mon_profil
+{
+    margin-top: 10px;
+}
+
+.gallery
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gallery .images
+{
+    gap: 15px;
+    max-width: 95%;
+    margin-top: 40px;
+    margin-bottom: 100px;
+    columns: 5 340px;
+}
+
+.images .card
+{
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    list-style: none;
+    margin-bottom: 14px;
+    border-radius: 4px;
+    box-shadow: 0.8rem 0.8rem 0.8rem 0.8rem rgba(0, 0, 0, 0.2);
+}
+
+.images .card a .price
+{
+    position: absolute;
+    padding: 10px;
+    z-index: 1;
+    background: var(--body-color);
+    backdrop-filter: blur(10px) saturate(15%);
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25),
+    inset 2px 2px 5px rgba(140, 134, 134, 0.778),
+    inset -3px -3px 5px rgba(137, 148, 245, 0.5);
+    border-radius: 5px;
+}
+
+.images .card a .price h1
+{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.images .card .details
+{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    margin-left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-radius: 5px;
+    transition: bottom 0.8s ease;
+    background: rgba(76, 76, 76, 30%);
+    backdrop-filter: blur(10px) saturate(50%), transparent;
+}
+
+.photographer
+{
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.details .photographer i
+{
+    font-size: 1.4rem;
+    margin-right: 10px;
+}
+
+.details .photographer a
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.details .photographer a img
+{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 0px 3px 3px #8a6cff;
+}
+
+.details .photographer a span
+{
+    color: #fff;
+    margin-left: 5px;
+    font-size: 1.05rem;
+    font-weight: bold;
+}
+
+.card .details button
+{
+    cursor: pointer;
+    padding: 3px 8px;
+    font-size: 1.1rem;
+    background: #8a6cff;
+    color: #fff;
+}
+
+.images a img
+{
+    width: 100%;
+}
+
+/* ================ Responsive ================== */
+/* ============ Version MacBook ============= */
+@media screen and (min-width: 1280px){
+    .middle .center
+    {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 767px) {
+    .middle
+    {
+        /* background: red; */
+        width: 100%;
+    }
+
+    .middle .center
+    {
+        margin-left: 80px;
+        width: 90%;
+
+    }
+}
+
+
+@media screen and (max-width: 767px) {
+    .middle
+    {
+        /* background: red; */
+        width: 100%;
+    }
+
+    .posts
+    {
+        width: 100%;
+    }
+
+    .actuality
+    {
+        width: 100%;
+    }
+
+    .professionnals .product
+    {
+        width: 100%;
+    }
+
+    .professionnals .product .product_cover
+    {
+        width: 100%;
+    }
+
+    .users
+    {
+        width: 100%;
+    }
+
+    .users .couverture
+    {
+        width: 100%;
+    }
+
+    .users .couverture img
+    {
+        object-fit: cover;
+    }
+
+    .content_post .post-details a .affiche
+    {
+        border-radius: 10px;
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .content_post .post-details .affiche
+    {
+        border-radius: 10px;
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+}

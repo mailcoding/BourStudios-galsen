@@ -1,0 +1,58 @@
+{% extends 'auth/layouts/forms.html' %}
+
+{% load static %}
+
+{% block Authentification %}
+
+<div id="wrapper">
+    <div class="form-container">
+        <span class="form-heading"> Connexion </span>
+        <h3 class="danger">{{ error }}</h3>
+        
+        {% for message in messages %}
+            <h2 class="danger"> {{ message }} </h2>
+        {% endfor %}
+        <form method="POST" action="/">
+            {% csrf_token %}
+
+            <h3 class="danger"> {{ error }} </h3>
+            
+            <div class="input-group">
+                <i class="fa fa-envelope"></i>
+                <input id="email" type="email" class="form-control" name="email" required autocomplete="email" placeholder="Votre mail">
+                <span class="bar"></span>
+            </div>
+            
+            <div class="input-group">
+                <i class="fa fa-lock"></i>
+                <input id="password" type="password" class="form-control" name="password" required autocomplete="new-password" placeholder="Votre Mot de Passe">
+                <span class="bar"></span>
+            </div>
+
+            
+
+            <div class="input-group">
+                <button type="submit">
+                    Se Connecter
+                </button>
+            </div>
+
+            <div class="switch-login">
+                <a href=""class="danger"> 
+                    <span>
+                        Mot de passe oublié?
+                    </span>
+                </a>
+
+                <a href="register" class="primary"> 
+                    <span>
+                        Pas de Compte?
+                    </span> 
+                </a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

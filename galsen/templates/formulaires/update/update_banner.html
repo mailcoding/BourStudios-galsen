@@ -1,0 +1,25 @@
+{% extends 'formulaires/layouts/base.html' %}
+
+{% block Base %}
+{% load static %}
+<form method="post" action="update_banner" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="card">
+        <center>
+            <div class="cover">
+                <input type="file" id="file-input" accept="image/png, image/jpeg" name="banner" required onchange="preview()">
+                <label for="file-input">
+                    <i class="fa fa-upload"></i> &nbsp; Choisir une Photo
+                </label>
+                <p id="num-of-files">Image Post</p>
+                <div id="images"></div>
+            </div>
+        </center>
+    </div>
+
+    <div class="button">
+        <button type="submit"> Mettre à jours </button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'auth/layouts/forms.html' %}
+
+{% load static %}
+
+{% block Authentification %}
+
+<div id="wrapper">
+    <div class="form-container">
+        <span class="form-heading">Inscription</span>
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <strong class="danger">Erreur:</strong> Veuillez corriger les erreurs ci-dessous.
+                <ul class="messages-error">
+                    {% for field, error in form.errors.items %}
+                        {% for message in error %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <form method="POST" action="/register">
+
+            {% csrf_token %}
+
+            <div class="inputfield">
+                <label><i class="fa fa-briefcase"></i>Type</label>
+                <div class="custom_select">
+                    {{ form.rôle }}
+                </div>
+            </div>
+
+            <div class="inputfield">
+                <label><i class="fa fa-transgender"></i>Gender</label>
+                <div class="custom_select">
+                    {{ form.genre }}
+                </div>
+            </div>
+
+            <div class="inputfield">
+                <label><i class="fa fa-user-secret"></i>Pseudo</label>
+                {{ form.username }}
+                <span class="bar"></span>
+                <!-- {% if form.username.errors %}
+                    <p class="danger">{{ form.username.errors|join:", " }}</p>
+                {% endif %} -->
+            </div>
+
+            <div class="inputfield">
+                <label><i class="fa fa-envelope"></i>Email</label>
+                {{ form.email }}
+                <span class="bar"></span>
+                <!-- {% if form.email.errors %}
+                    <p class="danger">{{ form.email.errors|join:", " }}</p>
+                {% endif %} -->
+            </div>
+
+            <div class="inputfield">
+                <label><i class="fa fa-unlock"></i>Password</label>
+                {{ form.password1 }}
+                <span class="bar"></span>
+                <!-- {% if form.password1.errors %}
+                    <p class="danger">{{ form.password1.errors|join:", " }}</p>
+                {% endif %} -->
+            </div>
+
+            <div class="inputfield">
+                <label><i class="fa fa-lock"></i>Confirm</label>
+                {{ form.password2 }}
+                <span class="bar"></span>
+                <!-- {% if form.password2.errors %}
+                    <p class="danger">{{ form.password2.errors|join:", " }}</p>
+                {% endif %} -->
+            </div>
+
+            <div class="inputfield terms">
+                <label class="check">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+                <p>Agreed to terms and conditions</p>
+            </div>
+
+            <div class="input-group">
+                <button type="submit" name="inscription" value="S'inscrire">
+                    S'inscrire
+                </button>
+            </div>
+
+            <div class="switch-login">
+                <a href="/">
+                    <p class="primary">Déjà un Compte?
+                        <span class="danger"> Connexion </span>
+                    </p>
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

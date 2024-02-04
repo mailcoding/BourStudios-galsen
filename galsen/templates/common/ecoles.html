@@ -1,0 +1,91 @@
+{% load static %}
+<section>
+    <form action="" class="search">
+        <input type="search" name="q" id="search-input" placeholder="Rechercher Filtrer"
+        />
+        <button type="submit" class="button">
+            <i class="fa fa-search"> Search </i>
+        </button>
+    </form>
+    
+</section>
+<section class="slider pubPolitique">
+    <div class="sliderP">
+        <a href="#">
+            <img src="{% static 'assets/delete/banner/banner.png' %}">
+        </a>
+    </div>
+
+    <div class="sliderP">
+        <a href="#">
+            <img src="{% static 'assets/delete/banner/banner.png' %}">
+        </a>
+    </div>
+
+    <div class="sliderP">
+        <a href="#">
+            <img src="{% static 'assets/delete/banner/banner.png' %}">
+        </a>
+    </div>
+
+    <div class="sliderP">
+        <a href="#">
+            <img src="{% static 'assets/delete/banner/banner.png' %}">
+        </a>
+    </div>
+
+    <div class="prev-button" onclick="plusSlideP(-1)">&#10094;</div>
+    <div class="next-button" onclick="plusSlideP(1)">&#10095;</div>
+
+    <div class="lines PageLines">
+        <div class="line_P" onclick="currentSlideP(1)"></div>
+
+        <div class="line_P" onclick="currentSlideP(2)"></div>
+
+        <div class="line_P" onclick="currentSlide(3)"></div>
+
+        <div class="line_P" onclick="currentSlide(4)"></div>
+    </div>
+</section>
+<section class="posts professionnals">
+
+    {% for CustomUsers in CustomUsers %}
+        <a href="{% url 'ecole_details' pk=CustomUsers.id %}" class="users">
+            <div class="couverture">
+                {% if CustomUsers.banner_image and CustomUsers.profile_image.url %}
+                    <img src="{{ CustomUsers.banner_image.url }}">
+                {% else %}
+                    <img src="{% static 'assets/default/user.png' %}">
+                {% endif %}
+            </div>
+            <div class="user_profile">
+                {% if CustomUsers.profile_image and CustomUsers.profile_image.url %}
+                    <img src="{{ CustomUsers.profile_image.url }}">
+                {% else %}
+                    <img src="{% static 'assets/default/user.png' %}">
+                {% endif %}
+                <div class="name_job_country">
+                    <h3 class="name">{{ CustomUsers.first_name }} {{ CustomUsers.last_name }}</h3>
+                    <h4 class="job">
+                        <i class="fa fa-graduation-cap danger"></i>
+                        <span>|</span>
+                        <p class="">Type: 
+                            <i class="primary">{{ CustomUsers.metier }}</i>
+                        </p>
+                        
+                    </h4>
+                    <h5 class="country">
+                        <i class="fa fa-map-marker text-muted"></i>
+                        {{ CustomUsers.pays }}, {{ CustomUsers.ville }}, {{ CustomUsers.quartier }}
+                    </h5>
+                    <br>
+                    <h5 class="job_date"> 
+                        <i class="primary fa fa-clock-o"></i>
+                        <p class="normal"> Membre depuis le: <i> {{ CustomUsers.date_joined }} </i> </p> 
+                    </h5>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+
+</section>

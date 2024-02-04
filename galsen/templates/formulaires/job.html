@@ -1,0 +1,26 @@
+{% extends 'formulaires/layouts/base.html' %}
+
+{% block Base %}
+{% load static %}
+<form method="post" action="{% url 'job' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="card">
+        <div class="input-group">
+            <i class="fa fa-edit"></i>
+            <input id="title" type="text" class="form-control" name="title" required autocomplete="title" placeholder="Le titre de votre offre">
+            <span class="bar"></span>
+        </div>
+    </div>
+
+    <textarea name="contenu_job" id="" cols="30" rows="10" class="texta" required></textarea>
+    <script src="{% static 'assets/ckeditor/ckeditor.js' %}"></script>
+    <script>
+        CKEDITOR.replace("contenu_job");
+    </script>
+
+    <div class="button">
+        <button type="submit"> Poster </button>
+    </div>
+</form>
+{% endblock %}
