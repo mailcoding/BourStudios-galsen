@@ -83,6 +83,8 @@ class Post(models.Model):
     date_creation_post = models.DateTimeField(auto_now_add=True)
     like_post = models.ManyToManyField(CustomUser, blank=True, related_name="likes")
     dislike = models.ManyToManyField(CustomUser, blank=True, related_name='dislikes')
+    shared_boby = models.TextField(blank=True, null=True)
+    share_on = models.DateTimeField(blank=True, null=True)
 
     @property
     def nombre_commentaire(self):

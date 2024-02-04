@@ -104,6 +104,6 @@ urlpatterns = [
     path('ad_job', Ad_job, name = 'Ad_job'),
     path('ad_boutique', Ad_boutique, name = 'Ad_boutique'),
 
-    path('ec_post/<int:pk>/like',AddLikes.as_view(),name='like'),
+    path('post/<int:pk>/like',AddLikes.as_view(),name='like'),
     path('post/<int:pk>/dislike',AddDislike.as_view(),name='dislike')
 ]

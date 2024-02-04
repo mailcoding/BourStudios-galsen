@@ -124,17 +124,17 @@
 
             <div class="infos_followings">
                 <section class="like">
-                   <a href="{% url 'like' post.id %}">
+                   <form method="POST" action="{% url 'like' post.pk %}">
                         {% csrf_token %}
                         <input type="hidden" name='next' value='{{ request.path }}'></input>
                         <button type = 'submit'>
-                            <i class="far fa-thumbs-up"> {{ post.like_post.count}}</i>
+                            <i class="far fa-thumbs-up"> <span>{{ post.like_post.count}}</span></i>
                         </button>
-                     </a>
+                    </form>
                 </section>
     
                 <section class="shares">
-                    <a href="#">
+                    <a href="/h">
                         <i class="fa fa-share-alt danger"></i>
                         <i class="text">Et partagé par</i> 
                         <b class="primary">8 000</b>
