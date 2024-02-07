@@ -726,3 +726,6 @@ class AddDislike(LoginRequiredMixin, View):
 
         next = request.POST.get('next', '/common/posts.html')
         return HttpResponseRedirect(next)
+
+def sharePoste(request):
+    pass
