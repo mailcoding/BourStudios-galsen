@@ -86,15 +86,13 @@ class Post(models.Model):
     shared_boby = models.TextField(blank=True, null=True)
     share_on = models.DateTimeField(blank=True, null=True)
     shared_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True, related_name='+')
-
+    
     class Meta:
-        ordering = ['-created_on', '-shared_on']
+        ordering = ['-date_creation_post', '-share_on']
 
     @property
     def nombre_commentaire(self):
         return Commentaire.objects.filter(post=self).count()
-    def nombre_like(self):
-        return Like.objects.filter(like=self).count()
     
 class MediasPost(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

@@ -97,6 +97,13 @@
                         {{ post.contenu_post|safe|truncatewords_html:10 }}
                     </div>
                     <div class="description-post">
+                        <form method = "POST" action = "{% url 'share-post' post.user.pk %}" class= "d-none" id="{{post.user.pk}}"> 
+                            {% csrf_token %}
+                            {{shareform }}
+                            <div class="d-grid gap-2">
+                                <button class= "btn btn-success mt-3">partage le contenu</button>
+                            </div>
+                        </form>
                         <p>
                             {{ post.contenu_post|safe }}
                         </p>
@@ -124,7 +131,7 @@
 
             <div class="infos_followings">
                 <section class="like">
-                   <form method="POST" action="{% url 'like' post.pk %}">
+                   <form method="POST" action="{% url 'like' post.user.pk %}">
                         {% csrf_token %}
                         <input type="hidden" name='next' value='{{ request.path }}'></input>
                         <button type = 'submit'>
@@ -134,12 +141,12 @@
                 </section>
     
                 <section class="shares">
-                    <a href="/h">
+                    <span onclick="shareToggle('{{post.pk}}')">
                         <i class="fa fa-share-alt danger"></i>
                         <i class="text">Et partagé par</i> 
                         <b class="primary">8 000</b>
                         <i class="text">membr.</i>
-                    </a>
+                    </span>
                 </section>
             </div>
             
@@ -169,3 +176,4 @@
     {% endfor %}
 
 </section>
+<script type="text/javascript" src="{% static 'js/galsen.js' %}"></script>

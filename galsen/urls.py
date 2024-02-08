@@ -18,7 +18,7 @@ from galsen.views import Ec_posts, Ec_personnel, Ec_entreprise, Ec_boutique
 from galsen.views import Ad_posts, Ad_personnel, Ad_ecole, Ad_entreprise, Ad_job, Ad_boutique
 
 # ========== Details: Personnels, Entreprise, Ecole ===================
-from .views import AddDislike, AddLikes, PersonnelDetails, EcoleDetails, EntrepriseDetails, sharePoste, update_post
+from .views import AddDislike, AddLikes, PersonnelDetails, EcoleDetails, EntrepriseDetails, SharedPosteVue, sharePoste, update_post
 
 # ========== Update Statu: Personnels, Entreprise, Ecole ===================
 from galsen.views import update, update_profile, update_banner, profile
@@ -106,5 +106,5 @@ urlpatterns = [
 
     path('post/<int:pk>/like',AddLikes.as_view(),name='like'),
     path('post/<int:pk>/dislike',AddDislike.as_view(),name='dislike'),
-    path('post/<int:pk/share', sharePoste, name='sharePoste')
+    path('post/<int:pk/share', SharedPosteVue, name='share-post')
 ]

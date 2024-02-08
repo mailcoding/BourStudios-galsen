@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.http import HttpResponse
 from django.conf import settings
 import os
@@ -5,7 +6,7 @@ import time
 from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, ShareForm
 from django.core.exceptions import ValidationError
 from django.contrib import messages
 from .decorators import role_required
@@ -455,9 +456,11 @@ def Per_posts(request):
         marque_dispositif = obtenir_marque_dispositif(request)
         request.user.marque_dispositif = marque_dispositif
         request.user.save()
+        share_form = ShareForm
 
     context = {
         'posts': posts,
+        'shareform':share_form,
     }
     return render(request, 'personnel/post.html', context)
 
@@ -519,9 +522,11 @@ def En_posts(request):
         marque_dispositif = obtenir_marque_dispositif(request)
         request.user.marque_dispositif = marque_dispositif
         request.user.save()
+        share_form = ShareForm
 
     context = {
         'posts': posts,
+        'shareform':share_form,
         'user': user
     }
 
@@ -573,9 +578,11 @@ def Ec_posts(request):
         marque_dispositif = obtenir_marque_dispositif(request)
         request.user.marque_dispositif = marque_dispositif
         request.user.save()
+        share_form = ShareForm
 
     context = {
         'posts': posts,
+        'shareform':share_form,
         'user': user
     }
     
@@ -729,3 +736,26 @@ class AddDislike(LoginRequiredMixin, View):
 
 def sharePoste(request):
     pass
+
+class SharedPosteVue(View):
+    def post(self, request, pk, *args, **kwargs):
+        original_post = Post.objects.get(pk=pk)
+        original_mediaPost = MediasPost.objects.get(post=pk)
+        form = ShareForm(request.Post)
+
+        if form.is_valid():
+            new_post = Post(
+                shared_body =self.request.POST.get('contenu_post'),
+                contenu_post =original_post.contenu_post,
+                user = original_post.user,
+                date_creation_post = original_post.date_creation_post,
+                shared_user = request.user,
+                shared_on = timezone.now()  
+            )
+            
+            new_post.save()
+
+            # for img in original_mediaPost.image.all():
+            #     new_post.image.add(img)
+            # new_post.save()
+        
