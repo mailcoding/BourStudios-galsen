@@ -309,7 +309,7 @@ body {
     margin-top: 10px;
 }
 
-.followers a
+.followers a form
 {
     display: flex;
     align-items: center;
@@ -640,3 +640,4 @@ section.professionnals.gallery.mon_profil
         object-fit: cover;
     }
 }
+

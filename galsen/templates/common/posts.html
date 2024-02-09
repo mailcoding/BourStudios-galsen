@@ -97,13 +97,7 @@
                         {{ post.contenu_post|safe|truncatewords_html:10 }}
                     </div>
                     <div class="description-post">
-                        <form method = "POST" action = "{% url 'share-post' post.user.pk %}" class= "d-none" id="{{post.user.pk}}"> 
-                            {% csrf_token %}
-                            {{shareform }}
-                            <div class="d-grid gap-2">
-                                <button class= "btn btn-success mt-3">partage le contenu</button>
-                            </div>
-                        </form>
+                        
                         <p>
                             {{ post.contenu_post|safe }}
                         </p>
@@ -130,19 +124,9 @@
             </section>
 
             <div class="infos_followings">
-                <section class="like">
-                   <form method="POST" action="{% url 'like' post.user.pk %}">
-                        {% csrf_token %}
-                        <input type="hidden" name='next' value='{{ request.path }}'></input>
-                        <button type = 'submit'>
-                            <i class="far fa-thumbs-up"> <span>{{ post.like_post.count}}</span></i>
-                        </button>
-                    </form>
-                </section>
     
                 <section class="shares">
-                    <span onclick="shareToggle('{{post.pk}}')">
-                        <i class="fa fa-share-alt danger"></i>
+                    <span>
                         <i class="text">Et partagé par</i> 
                         <b class="primary">8 000</b>
                         <i class="text">membr.</i>
@@ -151,10 +135,14 @@
             </div>
             
             <section class="followers">
-                <a href="#" class="like-btn" onclick="toggleLike()">
-                    <span class="like-icon" id="likeIcon">
-                        <i class="fa fa-thumbs-up" ></i>
-                    </span>
+                <a  class="like-btn" onclick="toggleLike()">
+                    <form method="POST" action="{% url 'likes' post.pk %}">
+                        {% csrf_token %}
+                        <input type="hidden" name='next' value='{{ request.path }}'></input>
+                        <button type = 'submit' class ="fa fa-thumbs-up"> 
+                            <span>{{ post.like_post.count}}</span>
+                        </button>
+                    </form>
                 </a>
     
                 <a href="{% url 'post_comments' post.id %}">
@@ -166,14 +154,20 @@
                         {% endif %}
                     </i>
                 </a>
+                <form method="POST" action="{% url 'share-post' %}" class="d-none" id="{{ post.pk }}">
+                    {% csrf_token %}
+                    {{ shareform }}
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success mt-3">share the post</button>
+                    </div>
+                </form>
     
-                <a href="#" id="pop-share">
+                {% comment %} <a href="#" id="pop-share">
                     <i class="fa fa-share-alt"></i>
-                </a>
+                </a> {% endcomment %}
             </section>
         </section>
 
     {% endfor %}
 
 </section>
-<script type="text/javascript" src="{% static 'js/galsen.js' %}"></script>

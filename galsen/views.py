@@ -573,12 +573,12 @@ def Ec_posts(request):
     # Récupérer tous les posts avec les médias associés, les utilisateurs, et la date de création
     posts = Post.objects.select_related('user').prefetch_related('mediaspost_set').order_by('-date_creation_post').all()
     user = request.user
-    
+    share_form = ShareForm()
+
     if request.user.is_authenticated:
         marque_dispositif = obtenir_marque_dispositif(request)
         request.user.marque_dispositif = marque_dispositif
         request.user.save()
-        share_form = ShareForm
 
     context = {
         'posts': posts,
@@ -741,7 +741,7 @@ class SharedPosteVue(View):
     def post(self, request, pk, *args, **kwargs):
         original_post = Post.objects.get(pk=pk)
         original_mediaPost = MediasPost.objects.get(post=pk)
-        form = ShareForm(request.Post)
+        form = ShareForm(request.POST)
 
         if form.is_valid():
             new_post = Post(
@@ -758,4 +758,4 @@ class SharedPosteVue(View):
             # for img in original_mediaPost.image.all():
             #     new_post.image.add(img)
             # new_post.save()
-        
+        return redirect('post')
