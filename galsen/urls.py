@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib.auth import views as auth_views
 # ========== Authentification ===================
 from galsen.views import log_in, register, log_out
 
@@ -55,6 +56,12 @@ urlpatterns = [
     path('', log_in, name = 'login'),
     path('register', register, name = 'register'),
     path('logout', log_out, name = 'logout'),
+
+    # =========== reset password ================
+    path('reset_password/', auth_views.PasswordResetView.as_view(), name='reset_password'),
+    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name="password_reset_confirm" ),
+    path("reset_password_complete/", auth_views.PasswordResetCompleteView.as_view(), name="password_reset_complete"),
     
     # ========== Formulaires Posts ===================
     path('post', create_post, name = 'post'),
@@ -106,5 +113,7 @@ urlpatterns = [
 
     path('post/<int:pk>/like',AddLikes.as_view(),name='likes'),
     path('post/<int:pk>/dislike',AddDislike.as_view(),name='dislike'),
-    path('post/<int:pk/share/', SharedPosteVue.as_view(), name='share-post')
+    path('post/<int:pk/share/', SharedPosteVue.as_view(), name='share-post'),
+
+    
 ]

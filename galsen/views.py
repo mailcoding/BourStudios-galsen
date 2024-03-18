@@ -18,6 +18,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.http import HttpResponseRedirect
 
+from django.core.mail import send_mail
 
 # ========== Details: personnels ===================
 class PersonnelDetails(DetailView):
@@ -208,7 +209,7 @@ def profile(request):
 
         # Sauvegarder les modifications
         user.save()
-
+         
         messages.success(request, 'Profil mis à jour avec succès.')
 
         # Rediriger vers la page du profil ou une autre page souhaitée
@@ -462,7 +463,7 @@ def Per_posts(request):
         'posts': posts,
         'shareform':share_form,
     }
-    return render(request, 'personnel/post.html', context)
+    return render(request, 'Personnel/post.html', context)
 
 @role_required(['personnel'])
 def Per_ecole(request):
@@ -474,7 +475,7 @@ def Per_ecole(request):
         'user': user
     }
     
-    return render(request, 'personnel/ecole.html', context)
+    return render(request, 'Personnel/ecole.html', context)
 
 @role_required(['personnel'])
 def Per_entreprise(request):
